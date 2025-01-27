@@ -1,4 +1,6 @@
-/home/luiz/Documents/estoque/src/main/java/com/ed1/estoque/Estoque.java
-/home/luiz/Documents/estoque/src/main/java/com/ed1/estoque/Lista.java
-/home/luiz/Documents/estoque/src/main/java/com/ed1/estoque/Livro.java
-/home/luiz/Documents/estoque/src/main/java/com/ed1/estoque/Menu.java
+/home/luiz/Documents/estoque-livros/src/main/java/com/ed1/estoque/Conexao.java
+/home/luiz/Documents/estoque-livros/src/main/java/com/ed1/estoque/Estoque.java
+/home/luiz/Documents/estoque-livros/src/main/java/com/ed1/estoque/Lista.java
+/home/luiz/Documents/estoque-livros/src/main/java/com/ed1/estoque/Livro.java
+/home/luiz/Documents/estoque-livros/src/main/java/com/ed1/estoque/Menu.java
+/home/luiz/Documents/estoque-livros/src/main/java/com/ed1/estoque/PrettyTable.java

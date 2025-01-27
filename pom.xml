@@ -10,5 +10,19 @@
         <maven.compiler.release>23</maven.compiler.release>
         <exec.mainClass>com.ed1.estoque.Estoque</exec.mainClass>
     </properties>
+    <dependencies>
+      <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+      <dependency>
+          <groupId>org.postgresql</groupId>
+          <artifactId>postgresql</artifactId>
+          <version>42.7.5</version>
+      </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
     <name>estoque-livros</name>
 </project>

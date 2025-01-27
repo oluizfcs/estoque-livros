@@ -1,4 +1,6 @@
 com/ed1/estoque/Livro.class
 com/ed1/estoque/Menu.class
+com/ed1/estoque/Conexao.class
+com/ed1/estoque/PrettyTable.class
 com/ed1/estoque/Lista.class
 com/ed1/estoque/Estoque.class

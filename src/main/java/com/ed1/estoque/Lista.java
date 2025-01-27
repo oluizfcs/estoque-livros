@@ -6,47 +6,67 @@ package com.ed1.estoque;
  */
 public class Lista {
 
-    private Object[] lista;
+    private Livro[] lista;
 
-    public Object[] getLista() {
+    public Livro[] getLista() {
         return lista;
     }
 
-    public void setLista(Object[] lista) {
+    public void setLista(Livro[] lista) {
         this.lista = lista;
     }
 
     Lista() {
-        this.lista = new Object[0];
+        this.lista = new Livro[0];
     }
 
-    public void inserir(Object obj) {
+    public void inserir(Livro obj) {
 
         aumentarCapacidade();
 
         this.lista[this.lista.length - 1] = obj;
     }
 
-    public void remover(int pos) {
+    public void remover(int id) {
+        
+        int pos = procurarPosicaoPeloId(id);
+        
         try {
 
-            this.lista[pos] = null;
+            if (pos != -1) {
+                this.lista[pos] = null;
 
-            // coloca o próximo elemento no lugar do que foi removido e o próximo do próximo no lugar do próximo e assim por diante
-            for (int i = pos; i < this.lista.length - 1; i++) {
-                this.lista[i] = this.lista[i + 1];
+                // coloca o próximo elemento no lugar do que foi removido e o próximo do próximo no lugar do próximo e assim por diante
+                for (int i = pos; i < this.lista.length - 1; i++) {
+                    this.lista[i] = this.lista[i + 1];
+                }
+
+                diminuirCapacidade();
             }
-
-            diminuirCapacidade();
 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Não existe posição " + pos + ".");
         }
     }
 
+    private int procurarPosicaoPeloId(int id) {
+
+        Livro[] livros = this.getLista();
+
+        int pos = -1;
+
+        for (int i = 0; i < this.lista.length; i++) {
+            if (livros[i].getId() == id) {
+                pos = i;
+            }
+        }
+
+        return pos;
+    }
+
     private void aumentarCapacidade() {
 
-        Object[] novaLista = new Object[this.lista.length + 1];
+        Livro[] novaLista = new Livro[this.lista.length + 1];
 
         for (int i = 0; i < this.lista.length; i++) {
             novaLista[i] = this.lista[i];
@@ -57,7 +77,7 @@ public class Lista {
 
     private void diminuirCapacidade() {
 
-        Object[] novaLista = new Object[this.lista.length - 1];
+        Livro[] novaLista = new Livro[this.lista.length - 1];
 
         for (int i = 0; i < this.lista.length - 1; i++) {
             novaLista[i] = this.lista[i];
@@ -65,5 +85,5 @@ public class Lista {
 
         this.lista = novaLista;
     }
-    
+
 }
