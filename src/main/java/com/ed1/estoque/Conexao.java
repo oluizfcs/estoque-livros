@@ -29,6 +29,9 @@ public class Conexao {
         }
     }
 
+    /**
+     * Recupera a lista de livros do banco de dados
+     */
     public Livro[] getLivros() {
         Lista lista = new Lista();
         try {
@@ -47,11 +50,16 @@ public class Conexao {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Erro ao recuperar livros do banco de dados");
+        } catch (NullPointerException e) {
+            System.out.println("Erro de conexão com o banco de dados: " + e.getMessage());
         }
         return lista.getLivros();
 
     }
 
+    /**
+     * Recupera a fila de espera no banco de dados 
+     */
     public String[] getFila() {
         Fila fila = new Fila();
         try {
@@ -64,10 +72,15 @@ public class Conexao {
             stmt.close();
         } catch (SQLException e) {
             System.out.println("Erro ao recuperar a fila do banco de dados");
+        } catch (NullPointerException e) {
+            System.out.println("Erro de conexão com o banco de dados: " + e.getMessage());
         }
         return fila.getFila();
     }
 
+    /**
+     * Salva os livros no banco de dados
+     */
     public void salvarAlteracoes(Lista lista) {
         try {
             PreparedStatement stmt = this.conn.prepareStatement("TRUNCATE TABLE livro RESTART IDENTITY");
@@ -86,10 +99,15 @@ public class Conexao {
             stmt.close();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Erro de banco de dados ao salvar lista: " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Erro de conexão com o banco de dados: " + e.getMessage());
         }
     }
 
+    /**
+     * Salva a fila de espera no banco de dados 
+     */
     public void salvarAlteracoes(Fila fila) {
         try {
             PreparedStatement stmt = this.conn.prepareStatement("TRUNCATE TABLE fila RESTART IDENTITY");
@@ -106,6 +124,8 @@ public class Conexao {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Erro de conexão com o banco de dados: " + e.getMessage());
         }
     }
 }
