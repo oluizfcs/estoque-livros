@@ -1,4 +1,6 @@
-package com.ed1.estoque;
+package com.ed1.estoque.ed;
+
+import com.ed1.estoque.Livro;
 
 /**
  *
@@ -8,7 +10,7 @@ public class Lista {
 
     private Livro[] lista;
 
-    public Livro[] getLista() {
+    public Livro[] getLivros() {
         return lista;
     }
 
@@ -16,7 +18,7 @@ public class Lista {
         this.lista = lista;
     }
 
-    Lista() {
+    public Lista() {
         this.lista = new Livro[0];
     }
 
@@ -49,21 +51,6 @@ public class Lista {
         }
     }
 
-    private int procurarPosicaoPeloId(int id) {
-
-        Livro[] livros = this.getLista();
-
-        int pos = -1;
-
-        for (int i = 0; i < this.lista.length; i++) {
-            if (livros[i].getId() == id) {
-                pos = i;
-            }
-        }
-
-        return pos;
-    }
-
     private void aumentarCapacidade() {
 
         Livro[] novaLista = new Livro[this.lista.length + 1];
@@ -86,4 +73,19 @@ public class Lista {
         this.lista = novaLista;
     }
 
+    private int procurarPosicaoPeloId(int id) {
+
+    Livro[] livros = this.getLivros();
+
+    int pos = -1;
+
+    for (int i = 0; i < this.lista.length; i++) {
+        if (livros[i].getId() == id) {
+            pos = i;
+        }
+    }
+
+    return pos;
+    }
+   
 }

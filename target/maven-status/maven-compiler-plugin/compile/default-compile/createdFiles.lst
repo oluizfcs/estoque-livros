@@ -1,6 +1,10 @@
-com/ed1/estoque/Livro.class
+com/ed1/estoque/ed/Fila.class
+com/ed1/estoque/ed/Pilha.class
 com/ed1/estoque/Menu.class
+com/ed1/estoque/Estoque.class
+com/ed1/estoque/Livro.class
+com/ed1/estoque/ed/Lista.class
+com/ed1/estoque/ordenacao/SelectionSort.class
 com/ed1/estoque/Conexao.class
 com/ed1/estoque/PrettyTable.class
-com/ed1/estoque/Lista.class
-com/ed1/estoque/Estoque.class
+com/ed1/estoque/ordenacao/BubbleSort.class

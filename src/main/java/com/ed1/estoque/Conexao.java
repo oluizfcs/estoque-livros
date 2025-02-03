@@ -1,5 +1,7 @@
 package com.ed1.estoque;
 
+import com.ed1.estoque.ed.Fila;
+import com.ed1.estoque.ed.Lista;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -46,17 +48,32 @@ public class Conexao {
         } catch (SQLException e) {
             System.out.println("Erro ao recuperar livros do banco de dados");
         }
-        return lista.getLista();
+        return lista.getLivros();
 
     }
-    
+
+    public String[] getFila() {
+        Fila fila = new Fila();
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("SELECT pessoa FROM fila ORDER BY id ASC");
+            stmt.executeQuery();
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                fila.inserir(rs.getString("pessoa"));
+            }
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println("Erro ao recuperar a fila do banco de dados");
+        }
+        return fila.getFila();
+    }
+
     public void salvarAlteracoes(Lista lista) {
         try {
-            PreparedStatement stmt = this.conn.prepareStatement("TRUNCATE TABLE livro RESTART IDENTITY;");
+            PreparedStatement stmt = this.conn.prepareStatement("TRUNCATE TABLE livro RESTART IDENTITY");
             stmt.executeUpdate();
-            
-            
-            for(Livro l : lista.getLista()) {
+
+            for (Livro l : lista.getLivros()) {
                 stmt = this.conn.prepareStatement("INSERT INTO livro (titulo, autor, anodepublicacao, quantidadenoestoque) VALUES (?, ?, ?, ?)");
                 stmt.setString(1, l.getTitulo());
                 stmt.setString(2, l.getAutor());
@@ -64,13 +81,31 @@ public class Conexao {
                 stmt.setInt(4, l.getQuantidadeNoEstoque());
                 stmt.executeUpdate();
             }
-            
-            System.out.println("Alterações salvas com sucesso.");
+
+            System.out.println("Lista de livros salva.");
             stmt.close();
-            
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    public void salvarAlteracoes(Fila fila) {
+        try {
+            PreparedStatement stmt = this.conn.prepareStatement("TRUNCATE TABLE fila RESTART IDENTITY");
+            stmt.executeUpdate();
+
+            for (String pessoa : fila.getFila()) {
+                stmt = this.conn.prepareStatement("INSERT INTO fila (pessoa) VALUES (?)");
+                stmt.setString(1, pessoa);
+                stmt.executeUpdate();
+            }
+
+            System.out.println("Fila de espera salva.");
+            stmt.close();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
